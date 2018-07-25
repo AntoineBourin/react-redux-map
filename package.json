@@ -4,13 +4,17 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "node-sass-chokidar": "^1.3.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-google-maps": "^9.4.5",
     "react-redux": "^5.0.7",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "redux": "^4.0.0"
   },
   "scripts": {
+    "build-css": "node-sass-chokidar src/styles/sass/ -o src/styles/build/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/styles/sass -o src/styles/build --watch --recursive",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
