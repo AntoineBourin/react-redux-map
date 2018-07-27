@@ -6,18 +6,18 @@ export class Requestable {
         this.client = axios.create({
             baseURL,
             timeout: 10000,
-            headers: { 'content-type': 'application/json' },
+            //headers: { 'content-type': 'application/json' },
         })
     }
 
     request(method, url) {
-        const doRequest = this.client.request({
+        const doRequest = () => this.client.request({
             baseURL: this.baseURL,
             url,
             method,
         });
 
-        return doRequest;
+        return doRequest();
     }
 }
 
