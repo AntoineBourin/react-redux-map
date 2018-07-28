@@ -21,14 +21,27 @@ class Filtermap extends Component {
         this.props.filtercontracts(event.target.value);
     }
 
+    componentWillReceiveProps(nextProps) {
+        const infoText = document.getElementById('station-contract');
+        if (nextProps.stationNumber) {
+            infoText.classList.remove('hidden');
+            infoText.innerText = nextProps.stationNumber + ' stations de vélo à ' + nextProps.contractFilter.contractName;
+        } else if (!nextProps.stationNumber && nextProps.contractFilter.isFiltered === true) {
+            infoText.classList.remove('hidden');
+            infoText.innerText = 'Aucune station dans cette ville.';
+        }
+    }
+
     render() {
         return (
           <div>
+              <h2>Filtrer les stations</h2>
               <form>
-                  <select name="contracts" onChange={this._contractsChanged.bind(this)}>
-                      <option value="-">Afficher un contrat</option>
+                  <select name="contracts" onChange={this._contractsChanged.bind(this)} defaultValue="-">
+                      <option value="-" disabled>Afficher un contrat</option>
                       {this.getContracts()}
                   </select>
+                  <p id="station-contract" className="hidden"></p>
                   <label htmlFor="opened-stations">Afficher stations ouvertes</label>
                   <input type="checkbox" name="opened-stations"/>
               </form>

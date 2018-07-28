@@ -6,6 +6,7 @@ const mapStateToProps = (state) => {
     return {
         stations: state.stations['stations'],
         isMarker: state.stations.isMarker,
+        contractFilter: state.stations.contractFilter,
     }
 };
 

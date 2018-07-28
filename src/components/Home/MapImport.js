@@ -9,16 +9,27 @@ const MapImport = withScriptjs(withGoogleMap(
         }
 
         addMarkers() {
-            return (Object.keys(this.props.stations).map((item) => {
-                const station = this.props.stations[item];
-                return (
-                  <Marker   key={item}
-                            position={station.position}
-                            title={station.name}
-                            onClick={() =>this._markerClicked(station)}
-                  />
-                );
+            return (Object.keys(this.props.stations)
+                .filter((item) => this.getFilterContract(item))
+                .map((item) => {
+                    const station = this.props.stations[item];
+                    return (
+                      <Marker   key={item}
+                                position={station.position}
+                                title={station.name}
+                                onClick={() =>this._markerClicked(station)}
+                      />
+                    );
             }));
+        }
+
+        getFilterContract(item) {
+            const filterContract = this.props.contractFilter;
+            if (filterContract.isFiltered === true) {
+                return this.props.stations[item].contract_name === filterContract.contractName;
+            } else {
+                return true;
+            }
         }
 
         _markerClicked(station) {

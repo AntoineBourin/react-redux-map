@@ -5,6 +5,7 @@ import { contractslist, filtercontracts } from "../actions/stations";
 const mapStateToProps = (state) => ({
     contracts: state.stations.contracts,
     contractFilter: state.stations.contractFilter,
+    stationNumber: state.stations.contractFilter.nbStations > 0 ? state.stations.contractFilter.nbStations : undefined,
 });
 
 const mapDispatchToProps = (dispatch) => ({
