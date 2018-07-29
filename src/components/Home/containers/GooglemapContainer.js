@@ -5,6 +5,7 @@ const mapStateToProps = (state) => ({
     stations: state.stations,
     isMarker: state.stations.isMarker,
     cityPosition: state.stations.contractFilter.position,
+    userLocation: state.userData,
 });
 
 const mapDispatchToProps = (dispatch) => ({});

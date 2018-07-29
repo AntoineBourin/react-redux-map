@@ -5,7 +5,7 @@ export class Requestable {
         this.baseURL = baseURL;
         this.client = axios.create({
             baseURL,
-            timeout: 10000,
+            timeout: 100000,
             //headers: { 'content-type': 'application/json' },
         })
     }

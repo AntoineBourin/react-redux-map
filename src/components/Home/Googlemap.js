@@ -11,6 +11,10 @@ class Googlemap extends Component {
                 this._mapRef.panTo(nextProps.cityPosition);
             }
         }
+
+        if (nextProps.userLocation.lat) {
+            this._mapRef.panTo(nextProps.userLocation);
+        }
     }
 
     static defaultProps = {
@@ -38,6 +42,9 @@ class Googlemap extends Component {
         const props = this.props;
         return (
             <div className="map-container">
+                <div>
+
+                </div>
                 <MapImportContainer position={props.map}
                     onMapMounted={this._handleMapMounted.bind(this)}
                    googleMapURL={GoogleURL}

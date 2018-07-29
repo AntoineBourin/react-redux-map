@@ -5,7 +5,7 @@ export const setStations = makeActionCreator('STATIONS_UPDATE', 'data');
 export const setMarker = makeActionCreator('MARKER_VISIBLE', 'data');
 export const setContracts = makeActionCreator('CONTRACTS_UPDATE', 'data');
 export const setFilteredContract = makeActionCreator('FILTER_CONTRACT', 'index', 'nbStations');
-export const resetFilterContract = makeActionCreator('CANCEL_FILTER');
+export const resetFilterContract = makeActionCreator('CANCEL_CONTRACT_FILTER');
 export const setCoordsForContract = makeActionCreator('CONTRACT_COORDS_UPDATED', 'data');
 
 export const stationslist = () => (dispatch) => {
@@ -17,7 +17,6 @@ export const stationslist = () => (dispatch) => {
 
 export const markerdetails = (enable) => (dispatch) => {
     dispatch(setMarker(enable));
-    console.log(enable);
 };
 
 export const contractslist = () => (dispatch) => {
@@ -44,8 +43,6 @@ export const setCoordsForCity = (city) => (dispatch) => {
                 dispatch(setCoordsForContract(response.results[0].geometry.location));
             } else {
                 dispatch(resetFilterContract());
-                console.log('City filtered was not found');
-                console.log(response);
             }
         })
 };

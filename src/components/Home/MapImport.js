@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
+import {_errorPosition} from "./actions/userdata";
+import userIcon from '../../beachflag.png';
 
 const MapImport = withScriptjs(withGoogleMap(
     class MapImport extends Component {
 
         componentWillMount() {
             this.props.stationslist();
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(this.showPosition.bind(this), this._errorPosition.bind(this));
+            }
+        }
+
+        showPosition(position) {
+            this.props.usercoords(position);
+        }
+
+        _errorPosition(error) {
+            this.props.coordsfromip();
         }
 
         addMarkers() {
@@ -47,6 +61,15 @@ const MapImport = withScriptjs(withGoogleMap(
                        ref={c => { onMapMounted && onMapMounted(c)}}>
                     {props.children}
                     {this.addMarkers()}
+                    <Marker position={props.userLocation.lat && props.userLocation}
+                            title="Votre position"
+                            options={{icon: userIcon}}>
+                        <InfoWindow>
+                            <div>
+                                Vous êtes ici
+                            </div>
+                        </InfoWindow>
+                    </Marker>
             </GoogleMap>
         }
     }

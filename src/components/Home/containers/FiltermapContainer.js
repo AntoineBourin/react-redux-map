@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Filtermap from '../Filtermap';
-import { contractslist, filtercontracts } from "../actions/stations";
+import {contractslist, filtercontracts, resetFilterContract} from "../actions/stations";
 
 const mapStateToProps = (state) => ({
     contracts: state.stations.contracts,
@@ -11,6 +11,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     contractslist: () => dispatch(contractslist()),
     filtercontracts: (index) => dispatch(filtercontracts(index)),
+    resetFilterContract: () => dispatch(resetFilterContract()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filtermap);
